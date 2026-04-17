@@ -2,6 +2,12 @@
 #include "telemetry.h"
 #include "cmdstack.h"
 
+/*
+assignment 3:
+- Switch from sliding window to SensorBuffer
+    -SensorBuffer:
+*/
+
 bool run = true;
 
 std::string cmd;
