@@ -52,8 +52,18 @@ public:
         }
     }
 
-    bool isFull() { return n == capacity; }
+    void dump()
+    {
+        std::cout << "SAMPLES: ";
 
+        for (int i{0}; i < n; i++)
+        {
+            std::cout << data[i] << " ";
+        }
+        std::cout << "\n";
+    }
+
+    bool isFull() { return n == capacity; }
     bool isEmpty() { return n == 0; }
 
     ~SensorBuffer()

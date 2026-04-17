@@ -6,30 +6,25 @@
 /*
 assignment 3:
 - Switch from sliding window to SensorBuffer
-    -SensorBuffer:
 */
-
-bool run = true;
-
-std::string cmd;
-
-// Tel params
-int data[10];
-int value;
-
-int n{0};
-int min_d;
-int max_d;
-float avg_d;
-
-// cmd stack params
-std::string mov;
-std::string data_mov[30];
-int k{0};
 
 int main()
 {
+    // While loop bool
+    bool run = true;
+
+    // Tel params
+    double value;
+
+    // cmd stack params
+    std::string cmd;
+    std::string mov;
+    std::string data_mov[30];
+    int k{0};
+
+    SensorBuffer buffer{10};
     while (run)
+
     {
 
         std::cin >> cmd;
@@ -37,41 +32,24 @@ int main()
         if (cmd == "sample")
         {
             std::cin >> value;
-
-                        // if (n < 10)
-            // {
-            //     data[n] = value;
-            //     n++;
-            // }
-            // else if (std::cin.fail())
-            // {
-            //     std::cout << "ERROR: value must be an integer\n";
-            //     std::cin.clear();            // clear the error flag
-            //     std::cin.ignore(1000, '\n'); // discard the bad input
-            // }
-            // else
-            // {
-            //     sliding_window(n, value, data);
-            // }
-        }
-        else if (cmd == "stats")
-        {
-            if (n == 0)
+            if (std::cin.fail())
             {
-                std::cout << "EMPTY" << "\n";
-                ;
+                std::cout << "ERROR: value must be a number\n";
+                std::cin.clear();            // clear the error flag
+                std::cin.ignore(1000, '\n'); // discard the bad input
             }
             else
             {
-                min_d = min(data, n);
-                max_d = max(data, n);
-                avg_d = avg(data, n);
-                std::cout << "COUNT=" << n << " MIN=" << min_d << " MAX=" << max_d << " AVG=" << avg_d << "\n";
+                buffer.push(value);
             }
+        }
+        else if (cmd == "stats")
+        {
+            buffer.stats();
         }
         else if (cmd == "dump")
         {
-            dump(data, n);
+            buffer.dump();
         }
 
         else if (cmd == "push")

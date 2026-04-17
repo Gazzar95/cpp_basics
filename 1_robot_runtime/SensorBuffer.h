@@ -7,6 +7,7 @@ public:
 
     void push(double value);
     void stats();
+    void dump();
     bool isFull();
     bool isEmpty();
 
