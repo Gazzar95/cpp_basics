@@ -1,6 +1,7 @@
 #include <iostream>
 #include "telemetry.h"
 #include "cmdstack.h"
+#include "SensorBuffer.h"
 
 /*
 assignment 3:
@@ -37,21 +38,21 @@ int main()
         {
             std::cin >> value;
 
-            if (n < 10)
-            {
-                data[n] = value;
-                n++;
-            }
-            else if (std::cin.fail())
-            {
-                std::cout << "ERROR: value must be an integer\n";
-                std::cin.clear();            // clear the error flag
-                std::cin.ignore(1000, '\n'); // discard the bad input
-            }
-            else
-            {
-                sliding_window(n, value, data);
-            }
+                        // if (n < 10)
+            // {
+            //     data[n] = value;
+            //     n++;
+            // }
+            // else if (std::cin.fail())
+            // {
+            //     std::cout << "ERROR: value must be an integer\n";
+            //     std::cin.clear();            // clear the error flag
+            //     std::cin.ignore(1000, '\n'); // discard the bad input
+            // }
+            // else
+            // {
+            //     sliding_window(n, value, data);
+            // }
         }
         else if (cmd == "stats")
         {

@@ -16,38 +16,45 @@ public:
     SensorBuffer(int cap)
     {
         capacity = cap;
-        data = new int[capacity];
+        data = new double[capacity];
     };
 
     void push(double value)
     {
-        if (n < capacity)
-        {
-            data[n] = value;
-            n++;
-        }
-        else
+
+        if (isFull())
         {
             data[k] = value;
             k = (k + 1) % capacity;
+        }
+        else
+        {
+            data[n] = value;
+            n++;
         }
     };
 
     void stats()
     {
-        min_d = min();
-        max_d = max();
-        avg_d = avg();
-        std::cout << "COUNT=" << n << " MIN=" << min_d << " MAX=" << max_d << " AVG=" << avg_d << "\n";
+        if (isEmpty())
+        {
+            std::cout << "Error: no data available";
+        }
+        else
+        {
+            double min_d{};
+            double max_d{};
+            double avg_d{};
+            min_d = min();
+            max_d = max();
+            avg_d = avg();
+            std::cout << "COUNT=" << n << " MIN=" << min_d << " MAX=" << max_d << " AVG=" << avg_d << "\n";
+        }
     }
 
-    void isFull()
-    {
-    }
+    bool isFull() { return n == capacity; }
 
-    void isEmpty()
-    {
-    }
+    bool isEmpty() { return n == 0; }
 
     ~SensorBuffer()
     {
@@ -57,11 +64,8 @@ public:
 private:
     int n{};
     int k{};
-    int *data;
+    double *data;
     int capacity{};
-    double min_d{};
-    double max_d{};
-    float avg_d{};
 
     double min()
     {
@@ -86,18 +90,19 @@ private:
                 max = data[i];
             }
         }
+        return max;
     }
 
-    float avg()
+    double avg()
     {
-        int sum{0};
-        float avg;
+        double sum{0};
+        double avg;
         for (int i{0}; i < n; i++)
         {
             sum = sum + data[i];
         }
 
-        avg = static_cast<float>(sum) / n;
+        avg = (sum) / n;
 
         return avg;
     }
