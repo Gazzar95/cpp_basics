@@ -1,25 +1,24 @@
 #include <iostream>
 
-class SensorBuffer
-{
+class SensorBuffer {
 public:
-    SensorBuffer(int cap);
+  SensorBuffer(int cap);
 
-    void push(double value);
-    void stats();
-    void dump();
-    bool isFull();
-    bool isEmpty();
+  void push(double value);
+  void stats();
+  void dump();
+  bool isFull();
+  bool isEmpty();
 
-    ~SensorBuffer();
+  ~SensorBuffer();
 
 private:
-    int n{};
-    int k{};
-    double *data;
-    int capacity{};
+  int n{};
+  int k{};
+  double* data;
+  int capacity{};
 
-    double min();
-    double max();
-    double avg();
+  double min();
+  double max();
+  double avg();
 };

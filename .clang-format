@@ -1,0 +1,11 @@
+# .clang-format
+BasedOnStyle: Google
+ColumnLimit: 100
+IndentWidth: 2
+AccessModifierOffset: -2
+AlignAfterOpenBracket: AlwaysBreak
+BraceWrapping:
+  AfterClass: false
+  AfterFunction: false
+  AfterStruct: false
+BreakBeforeBraces: Attach
