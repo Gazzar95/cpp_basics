@@ -10,9 +10,11 @@ Requirements:
 #include "SensorBuffer.h"
 
 #include <iostream>
+#include <memory>
 #include <string>
 
-SensorBuffer::SensorBuffer(int cap) : capacity{cap}, n{0}, k{0}, data{new double[capacity]} {};
+SensorBuffer::SensorBuffer(int cap)
+    : capacity{cap}, n{0}, k{0}, data{std::make_unique<double[]>(capacity)} {};
 
 void SensorBuffer::push(double value) {
   if (isFull()) {
@@ -49,8 +51,6 @@ void SensorBuffer::dump() {
 
 bool SensorBuffer::isFull() { return n == capacity; }
 bool SensorBuffer::isEmpty() { return n == 0; }
-
-SensorBuffer::~SensorBuffer() { delete[] data; };
 
 double SensorBuffer::min() {
   double min{data[0]};
