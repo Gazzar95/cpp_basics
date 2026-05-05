@@ -26,8 +26,8 @@ object lifetime tied to scope.
 #include "cmdstack.h"
 #include "telemetry.h"
 
-RobotRuntime::RobotRuntime(const std::string& na, int ID, int capacity)
-    : name{na}, session_id{ID}, buffer{capacity} {};
+RobotRuntime::RobotRuntime(const std::string& na, int ID, SensorBuffer&& buffer)
+    : name{na}, session_id{ID}, buffer{std::move(buffer)} {};
 
 void RobotRuntime::run() {
   // While loop bool

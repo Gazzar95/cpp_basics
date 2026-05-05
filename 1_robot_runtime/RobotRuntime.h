@@ -1,7 +1,4 @@
-
-
-#ifndef ROBOT_RUNTIME_H
-#define ROBOT_RUNTIME_H
+#pragma once
 
 #include <string>
 
@@ -9,7 +6,7 @@
 
 class RobotRuntime {
 public:
-  RobotRuntime(const std::string& na, int ID, int capacity);
+  RobotRuntime(const std::string& na, int ID, SensorBuffer&& Buffer);
 
   void run();
 
@@ -22,5 +19,3 @@ private:
   int session_id{};
   SensorBuffer buffer;
 };
-
-#endif
