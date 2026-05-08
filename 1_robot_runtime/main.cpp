@@ -1,5 +1,5 @@
+#include <iostream>
 
-#include "SensorBuffer.h"
 #include "memory"
 
 // - Add a `CommandEvent` struct and overload `operator<<` for it so events print cleanly

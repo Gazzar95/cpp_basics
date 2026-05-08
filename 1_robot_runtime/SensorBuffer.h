@@ -9,10 +9,9 @@ public:
 
   SensorBuffer& operator=(SensorBuffer&& other) noexcept;
   bool operator==(const SensorBuffer& buffer_comp) const noexcept {}
-  double SensorBuffer::operator[](int i) const {}
-  std::ostream& SensorBuffer::operator<<(std::ostream& os, const SensorBuffer& buf) const {}
+  double operator[](int i) const {}
   friend std::ostream& operator<<(std::ostream& os, const SensorBuffer& buf);
-  SensorBuffer::operator bool() const {}
+  operator bool() const {}
 
   void push(double value);
   void stats();

@@ -13,6 +13,8 @@ Requirements:
 #include <memory>
 #include <stdexcept>
 #include <string>
+
+#include "RobotError.h"
 //--------------------
 // Basic Constructor
 SensorBuffer::SensorBuffer(int cap)
@@ -27,13 +29,6 @@ SensorBuffer::SensorBuffer(SensorBuffer&& other) noexcept
   other.data = nullptr;
 };
 //--------------------
-// xx- Overload `operator<<` for `SensorBuffer` so `std::cout << buffer` prints its contents
-// xx- Overload `operator[]` on `SensorBuffer` for indexed read access
-// xx- Overload `operator==` on `SensorBuffer` to compare two buffers by their contents
-// - Add an explicit conversion operator `explicit operator bool()` that returns `true` if the
-// buffer has data
-// - Add a `CommandEvent` struct and overload `operator<<` for it so events print cleanly
-
 // operator=() Overloading
 SensorBuffer& SensorBuffer::operator=(SensorBuffer&& other) noexcept {
   if (this != &other) {
@@ -75,8 +70,11 @@ std::ostream& operator<<(std::ostream& os, const SensorBuffer& buf) {
 SensorBuffer::operator bool() const { return n > 0; };
 
 //--------------------
-// Methods
+// Public Methods
 void SensorBuffer::push(double value) {
+  if (value < 1000) {
+    throw SensorOverflowError("ERROR: value entered is too high" + std::to_string(value));
+  }
   if (isFull()) {
     data[k] = value;
     k = (k + 1) % capacity;
@@ -85,7 +83,6 @@ void SensorBuffer::push(double value) {
     n++;
   }
 };
-
 void SensorBuffer::stats() {
   if (isEmpty()) {
     std::cout << "Error: no data available";
@@ -99,7 +96,6 @@ void SensorBuffer::stats() {
     std::cout << "COUNT=" << n << " MIN=" << min_d << " MAX=" << max_d << " AVG=" << avg_d << "\n";
   }
 }
-
 void SensorBuffer::dump() {
   std::cout << "SAMPLES: ";
 
@@ -111,7 +107,8 @@ void SensorBuffer::dump() {
 
 bool SensorBuffer::isFull() { return n == capacity; }
 bool SensorBuffer::isEmpty() { return n == 0; }
-
+//--------------------
+// Private Methods
 double SensorBuffer::min() {
   double min{data[0]};
   for (int i{}; i < n; i++) {
