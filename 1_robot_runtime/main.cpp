@@ -1,30 +1,22 @@
+// - Instantiate with `std::make_unique<RobotRuntime>("Atlas", 1)`
+// - Call `->run()`
+// - Outer try/catch for fatal errors
+
 #include <iostream>
+#include <memory>
 
-#include "memory"
-
-// - Add a `CommandEvent` struct and overload `operator<<` for it so events print cleanly
-
-struct CommandEvent {
-  std::string cmd;
-  float time;
-  int priority;
-
-  friend std::ostream& operator<<(std::ostream& os, const CommandEvent& cmd);
-};
-
-std::ostream& operator<<(std::ostream& os, const CommandEvent& cmd_evnt) {
-  os << cmd_evnt.cmd << " " << cmd_evnt.time << " " << cmd_evnt.priority << "\n";
-
-  return os;
-}
+#include "RobotError.h"
+#include "RobotRuntime.h"
+#include "SensorBuffer.h"
 
 int main() {
-  CommandEvent test;
-  test.cmd = "move";
-  test.time = 1.2;
-  test.priority = 1;
+  try {
+    auto runtime = std::make_unique<RobotRuntime>("run1", 1, SensorBuffer(10));
 
-  std::cout << test;
+    runtime->run();
+  } catch (const std::exception& e) {
+    std::cout << e.what() << "\n";
+  };
 
   return 0;
 }

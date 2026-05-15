@@ -23,6 +23,11 @@ public:
   SensorOverflowError(const std::string& msg) : RobotError(msg) {}
 };
 
+class CommandOverflowError : public RobotError {
+public:
+  CommandOverflowError(const std::string& msg) : RobotError(msg) {}
+};
+
 class InvalidCommandError : public RobotError {
 public:
   InvalidCommandError(const std::string& msg) : RobotError(msg) {}
