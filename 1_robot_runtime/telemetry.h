@@ -1,3 +1,4 @@
+#pragma once
 
 int sliding_window(int n, int value, int data[]);
 int min(int arr[], int size);

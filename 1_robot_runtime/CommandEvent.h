@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <string>
+#pragma once
 
 struct CommandEvent {
   int timestamp;

@@ -1,8 +1,7 @@
-#pragma once
-
 #include <string>
 
 #include "SensorBuffer.h"
+#pragma once
 
 class RobotRuntime {
 public:

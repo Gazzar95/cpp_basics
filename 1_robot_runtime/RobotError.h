@@ -12,6 +12,7 @@ and continue running (don't crash on bad input)
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#pragma once
 
 class RobotError : public std::runtime_error {
 public:

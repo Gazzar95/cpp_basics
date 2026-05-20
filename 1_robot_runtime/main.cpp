@@ -16,7 +16,7 @@ int main() {
     runtime->run();
   } catch (const std::exception& e) {
     std::cout << e.what() << "\n";
-  };
+  }
 
   return 0;
 }
