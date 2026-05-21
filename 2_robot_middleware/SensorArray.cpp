@@ -1,11 +1,15 @@
-// `SensorArray` class:
+//`SensorArray` class:
 // - Holds `std::vector<std::unique_ptr<Sensor>>`
 // - `addSensor(std::unique_ptr<Sensor> s)`
 // - `readAll()` — iterates and prints each sensor's output via `operator<<`
 // - `calibrateAll()` — calls calibrate() on each
 // - `getSensorById(int id)` — returns raw pointer (non-owning), use `dynamic_cast` to let caller
 // check the concrete type
+#include "SensorArray.h"
+
+#include <iostream>
 #include <memory>
+#include <vector>
 
 #include "Sensor.h"
 
@@ -18,7 +22,7 @@ void SensorArray::readAll() {
 }
 
 void SensorArray::calibrateAll() {
-  for (const auto& sensor : all_sensors) {
+  for (auto& sensor : all_sensors) {
     sensor->calibrate();
   }
 }

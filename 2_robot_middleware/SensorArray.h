@@ -1,32 +1,17 @@
 #pragma once
 #include <memory>
+#include <vector>
 
 #include "Sensor.h"
 
 class SensorArray {
 public:
-  void addSensor(std::unique_ptr<Sensor> s) { all_sensors.push_back(std::move(s)); }
+  void addSensor(std::unique_ptr<Sensor> s);
 
-  void readAll() {
-    for (auto& sensor : all_sensors) {
-      std::cout << *sensor << "\n";
-    }
-  }
+  void readAll();
+  void calibrateAll();
 
-  void calibrateAll() {
-    for (const auto& sensor : all_sensors) {
-      sensor->calibrate();
-    }
-  }
-
-  Sensor* getSensorById(int id) {
-    for (const auto& sensor : all_sensors) {
-      if (id == sensor->id()) {
-        return sensor.get();
-      }
-    }
-    return nullptr;
-  }
+  Sensor* getSensorById(int id);
 
 private:
   std::vector<std::unique_ptr<Sensor>> all_sensors;

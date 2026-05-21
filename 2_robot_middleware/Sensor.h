@@ -29,8 +29,3 @@ protected:
   std::string name_;
   int id_;
 };
-
-std::ostream& operator<<(std::ostream& os, const Sensor& sensor) {
-  os << sensor.read() << " " << sensor.type();
-  return os;
-}

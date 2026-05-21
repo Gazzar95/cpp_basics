@@ -9,7 +9,7 @@ class ImuSensor : public Sensor {
 public:
   ImuSensor(const std::string& name, int id) : Sensor(name, id) {}
 
-  double read() const override {}
-  std::string type() const override {}
-  void calibrate() override {}
+  double read() const override;
+  std::string type() const override;
+  void calibrate() override;
 };
