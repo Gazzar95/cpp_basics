@@ -11,7 +11,7 @@ public:
   void readAll();
   void calibrateAll();
 
-  Sensor* getSensorById(int id);
+  Sensor* getSensorById(int id) noexcept;
 
 private:
   std::vector<std::unique_ptr<Sensor>> all_sensors;

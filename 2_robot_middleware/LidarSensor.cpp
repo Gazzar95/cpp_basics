@@ -21,4 +21,4 @@ double LidarSensor::read() const {
   return measure;
 };
 
-std::string LidarSensor::type() const { return "Lidar"; }
+std::string LidarSensor::type() const noexcept { return "Lidar"; }

@@ -10,6 +10,7 @@ public:
   ImuSensor(const std::string& name, int id) : Sensor(name, id) {}
 
   double read() const override;
-  std::string type() const override;
+  std::string type() const noexcept override;
   void calibrate() override;
+  void calibrate(bool force_fail);
 };

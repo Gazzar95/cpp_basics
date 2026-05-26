@@ -28,3 +28,8 @@ class CalibrationError : public SensorException {
 public:
   CalibrationError(const std::string& msg) : SensorException(msg) {}
 };
+
+class SensorArrayError : public SensorException {
+public:
+  SensorArrayError(const std::string msg) : SensorException{msg} {}
+};

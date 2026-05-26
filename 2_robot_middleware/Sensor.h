@@ -17,9 +17,9 @@ public:
   Sensor(const std::string& name, int id) : name_{name}, id_{id} {}
 
   virtual double read() const = 0;
-  virtual std::string type() const = 0;
+  virtual std::string type() const noexcept = 0;
   virtual void calibrate() { std::cout << "Default calibration" << "\n"; }
-  int id() const { return id_; }
+  int id() const noexcept { return id_; }
 
   friend std::ostream& operator<<(std::ostream& os, const Sensor& sensor);
 

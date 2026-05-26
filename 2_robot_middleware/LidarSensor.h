@@ -12,5 +12,5 @@ public:
 
   double read() const override;
 
-  std::string type() const override;
+  std::string type() const noexcept override;
 };
