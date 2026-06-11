@@ -192,5 +192,3 @@ Complete and polish the `RobotRuntime` program. This is a direct C++ successor t
 | A7: Exception Handling | 2–3 hrs |
 | Capstone | 4–6 hrs |
 | **Total** | **~20–27 hrs** |
-
-This runs roughly in parallel with the lecture content — do the assignment after finishing each module's videos, before moving to the next module.
