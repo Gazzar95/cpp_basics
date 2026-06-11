@@ -23,8 +23,8 @@
 
 //--------------------
 // Basic Constructor
-RobotRuntime::RobotRuntime(const std::string& na, int ID, SensorBuffer&& buffer)
-    : name{na}, session_id{ID}, buffer{std::move(buffer)} {}
+RobotRuntime::RobotRuntime(const std::string& name, int ID, SensorBuffer&& buffer)
+    : name{name}, session_id{ID}, buffer{std::move(buffer)} {}
 RobotRuntime::RobotRuntime(RobotRuntime&& other) noexcept
     : name(std::move(other.name)), session_id{other.session_id}, buffer{std::move(other.buffer)} {
   other.session_id = 0;

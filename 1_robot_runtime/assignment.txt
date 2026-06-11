@@ -1,0 +1,54 @@
+//Define a custom exception hierarchy: a base RobotError, and 
+//two subclasses SensorOverflowError and InvalidCommandError. 
+//Each should carry a message passable to what().
+
+#include <iostream>
+#include <memory>
+
+
+class SensorBuffer {
+public:
+    SensorBuffer(int cap)
+        : data{std::make_unique(cap)},
+          capacity{cap}, size{0} {}
+
+    // Write these:
+    SensorBuffer(SensorBuffer&& other) noexcept{
+        size = other.size;
+        capacity = other.capacity;
+        data = std::move(other.data);
+
+        other.size = 0;
+        other.capacity = 0;
+    }
+
+
+    SensorBuffer& operator=(SensorBuffer&& other) noexcept{
+        if (this == &other){
+            return *this;
+        }
+        this->size = other.size;
+        this->capacity = other.capacity;
+        this->data = std::move(other.data);
+        other.size = 0;
+        other.capacity = 0;
+        return *this;
+    }
+ds
+private:
+    std::unique_ptr data;
+    int capacity;
+    int size;
+};
+
+/*
+
+---------------
+SensorBuffer a;
+
+SensorBuffer b(a);
+---------------
+SensorBuffer a
+SensorBuffer b
+b = a;
+*/

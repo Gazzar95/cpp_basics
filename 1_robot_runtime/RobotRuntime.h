@@ -7,7 +7,7 @@ class RobotRuntime {
 public:
   //--------------------
   // Basic Constructor
-  RobotRuntime(const std::string& na, int ID, SensorBuffer&& Buffer);
+  RobotRuntime(const std::string& name, int ID, SensorBuffer&& Buffer);
   RobotRuntime(RobotRuntime&& other) noexcept;
 
   void run();
