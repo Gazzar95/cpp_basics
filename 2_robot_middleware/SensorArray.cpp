@@ -5,6 +5,15 @@
 // - `calibrateAll()` — calls calibrate() on each
 // - `getSensorById(int id)` — returns raw pointer (non-owning), use `dynamic_cast` to let caller
 // check the concrete type
+
+// In `SensorArray`, add:
+// - `filterSensors(std::function<bool(const Sensor&)> predicate)`
+// — returns vector of non-owning pointers to sensors matching the predicate
+// - `transformReadings(std::function<double(double)> transform)`
+// — applies transform to all current readings, returns vector of results
+// - `sortSensorsBy(std::function<bool(const Sensor&, const Sensor&)> comparator)`
+// — sorts internal vector in-place
+
 #include "SensorArray.h"
 
 #include <iostream>
@@ -51,9 +60,14 @@ Sensor* SensorArray::getSensorById(int id) noexcept {
   return nullptr;
 }
 
-// In `SensorArray::readAll()`:
-// - Catch per-sensor exceptions, log them, and continue reading
-// remaining sensors — one bad sensor shouldn't stop the loop
-// - Use `std::nested_exception` / `std::throw_with_nested` to wrap
-// a `SensorReadError` inside a higher-level `SensorArrayError` when
-// more than 2 sensors fail in one pass
+std::vector<Sensor*> SensorArray::filterSensors(std::function<bool(const Sensor&)> filter) {
+  std::vector<Sensor*> results;
+
+  for (const auto& sensor : all_sensors) {
+    if (filter(*sensor)) {
+      results.push_back(sensor.get());
+    }
+  }
+
+  return results;
+}

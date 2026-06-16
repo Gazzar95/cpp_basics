@@ -1,0 +1,65 @@
+Here are five questions, each targeting a different concept:
+--------------------------------------------------------------------------
+**Q1 — Basic class template:**
+Write a `Pair<T>` class that holds two values of the same type, with a method `larger()` that returns the bigger one.
+--------------------------------------------------------------------------
+template<typename T>
+class Pair{
+    public:
+    Pair(const T& value1, const T& value2): a{value1}, b{value2} {};
+
+    T larger() const{
+        return (a>b) ? a : b;
+    }
+
+    private:
+    T a;
+    T b;
+};
+
+--------------------------------------------------------------------------
+**Q2 — Non-type template parameter:**
+What's the difference between these two? When would you use each?
+```cpp
+class BufferA {
+    BufferA(int size) : data(new int[size]) {}
+    int* data;
+};
+
+template<std::size_t N>
+class BufferB {
+    int data[N];
+};
+```
+--------------------------------------------------------------------------
+
+differences are:
+1) BufferA
+- takes user input from constructor 
+- saves data to heap with pointer data
+- would initialize like this:
+BufferA a(5);
+
+2) BufferB
+- takes input from template
+-saves to 
+- would initialize like this:
+BufferB<5> a;
+
+For A size is defined at runtime. Memory saved to the heap, so slower but can be more flexible
+for B size is defined at compile time. Memory saved to the stack, faster and easier to manage
+--------------------------------------------------------------------------
+**Q3 — Template specialization:**
+You have `template<typename T> class Printer`. Write a specialization for `T = bool` that prints `"YES"` or `"NO"` instead of `1` or `0`.
+--------------------------------------------------------------------------
+
+--------------------------------------------------------------------------
+**Q4 — Variadic templates:**
+What does `sizeof...(Args)` return if you call `makeArray<double>(1, 2.5, 3.7, 4.0)`?
+--------------------------------------------------------------------------
+returns 4
+--------------------------------------------------------------------------
+**Q5 — Type traits:**
+What does `if constexpr` do differently from a regular `if`? Why can't you use a regular `if` in `printReading`?
+--------------------------------------------------------------------------
+means if the condition is not true then comilor doesn't even see it. 
