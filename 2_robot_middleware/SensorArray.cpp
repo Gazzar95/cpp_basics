@@ -7,8 +7,7 @@
 // check the concrete type
 
 // In `SensorArray`, add:
-// - `filterSensors(std::function<bool(const Sensor&)> predicate)`
-// — returns vector of non-owning pointers to sensors matching the predicate
+
 // - `transformReadings(std::function<double(double)> transform)`
 // — applies transform to all current readings, returns vector of results
 // - `sortSensorsBy(std::function<bool(const Sensor&, const Sensor&)> comparator)`
@@ -26,8 +25,6 @@
 
 void SensorArray::addSensor(std::unique_ptr<Sensor> s) { all_sensors.push_back(std::move(s)); }
 
-// - Use `std::nested_exception` / `std::throw_with_nested` to wrap a `SensorReadError`
-// inside a higher-level `SensorArrayError` when more than 2 sensors fail in one pass
 void SensorArray::readAll() {
   int err_count{};
 
@@ -70,4 +67,14 @@ std::vector<Sensor*> SensorArray::filterSensors(std::function<bool(const Sensor&
   }
 
   return results;
+}
+
+std::vector<double> SensorArray::transformReading(std::function<double(double)> transform) {
+  std::vector<double> transformed_readings;
+
+  for (const auto& sensor : all_sensors) {
+    transformed_readings.push_back(transform(sensor->read()));
+  }
+
+  return transformed_readings;
 }

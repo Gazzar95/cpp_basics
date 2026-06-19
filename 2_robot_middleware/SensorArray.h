@@ -21,6 +21,7 @@ public:
   void calibrateAll();
   Sensor* getSensorById(int id) noexcept;
   std::vector<Sensor*> filterSensors(std::function<bool(const Sensor&)> filter);
+  std::vector<double> transformReading(std::function<double(double)> transform);
 
 private:
   std::vector<std::unique_ptr<Sensor>> all_sensors;
