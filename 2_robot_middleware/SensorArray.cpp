@@ -57,7 +57,7 @@ Sensor* SensorArray::getSensorById(int id) noexcept {
   return nullptr;
 }
 
-std::vector<Sensor*> SensorArray::filterSensors(std::function<bool(const Sensor&)> filter) {
+std::vector<Sensor*> SensorArray::filterSensors(std::function<bool(const Sensor&)> filter) const {
   std::vector<Sensor*> results;
 
   for (const auto& sensor : all_sensors) {
@@ -69,7 +69,7 @@ std::vector<Sensor*> SensorArray::filterSensors(std::function<bool(const Sensor&
   return results;
 }
 
-std::vector<double> SensorArray::transformReading(std::function<double(double)> transform) {
+std::vector<double> SensorArray::transformReading(std::function<double(double)> transform) const {
   std::vector<double> transformed_readings;
 
   for (const auto& sensor : all_sensors) {

@@ -16,7 +16,10 @@
 template <typename T>
 class Pipeline {
 public:
-  void addStage(const std::function<T(T)> function) { functions.push_back(function); }
+  template <typename F>
+  void addStage(F&& function) {
+    functions.push_back(std::forward<F>(function));
+  }
 
   T process(T input) {
     T solution = input;
