@@ -22,6 +22,7 @@ public:
   Sensor* getSensorById(int id) noexcept;
   std::vector<Sensor*> filterSensors(std::function<bool(const Sensor&)> filter);
   std::vector<double> transformReading(std::function<double(double)> transform);
+  void sortSensorsBy(std::function<bool(const Sensor&, const Sensor&)> comparator);
 
 private:
   std::vector<std::unique_ptr<Sensor>> all_sensors;

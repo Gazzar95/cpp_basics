@@ -78,3 +78,10 @@ std::vector<double> SensorArray::transformReading(std::function<double(double)> 
 
   return transformed_readings;
 }
+
+void SensorArray::sortSensorsBy(std::function<bool(const Sensor&, const Sensor&)> comparator) {
+  std::sort(
+      all_sensors.begin(), all_sensors.end(),
+      [&comparator](const std::unique_ptr<Sensor>& a, const std::unique_ptr<Sensor>& b) {
+        return comparator(*a, *b);
+      });
